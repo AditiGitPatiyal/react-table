@@ -82,7 +82,7 @@ const Table = (props) => {
                 <tr key={idx}>
                   {heading.map((head, id) => {
                     return (
-                      <td key={id}>
+                      <td key={id} className="text-break">
                         {typeof item[head] === "object"
                           ? JSON.stringify(item[head])
                           : item[head]}
