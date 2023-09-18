@@ -10,7 +10,7 @@ const Table = (props) => {
   const [sortColumn, setSortColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage] = useState(5);
+  const [recordsPerPage,setrecordsPerPage] = useState(5);
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   const currentRecords = filteredData.slice(indexOfFirstRecord, 
@@ -38,15 +38,26 @@ const Table = (props) => {
   return (
     <>
       <div className="container">
-        <form className="d-flex m-5">
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            value={query}
-            onChange={(e) => handleSearch(e.target.value)}
-          />
-        </form>
+        <div className="box my-5 d-flex justify-content-between">
+            <form>
+            <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                value={query}
+                onChange={(e) => handleSearch(e.target.value)}
+                style={{width:"500px"}}
+            />
+            </form>
+            <div className="d-flex align-items-center" >
+                <h6 className="me-2">Records Per Page</h6>
+                <select className="form-select" onChange={(e)=>setrecordsPerPage(e.target.value)} style={{width:"70px"}} >
+                    <option value="5" selected="">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
+            </div>
+        </div>
         <table className="table table-striped">
           <thead>
             <tr>
