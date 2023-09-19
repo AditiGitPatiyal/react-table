@@ -13,8 +13,6 @@ const Table = (props) => {
   const [recordsPerPage,setrecordsPerPage] = useState(5);
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = filteredData.slice(indexOfFirstRecord, 
-    indexOfLastRecord);
   const nPages = Math.ceil(filteredData.length / recordsPerPage);
 
   const sethead = () => {
@@ -63,7 +61,7 @@ const Table = (props) => {
             <tr>
               {heading.map((head, id) => {
                 return (
-                  <th key={id} width="30%" >
+                  <th key={id} width="15%" >
                     <div className="d-flex">{head}
                         <span className={`ms-1  ${heading[id] === sortColumn && sortDirection==='asc' ? 'icon-selected' : ''}`} onClick={() => handleSortAsc(head)}>▲</span>
                         <span className={`ms-1  ${heading[id] === sortColumn && sortDirection==='des' ? 'icon-selected' : ''}`} onClick={() => handleSortDes(head)}>▼</span>
@@ -74,7 +72,7 @@ const Table = (props) => {
             </tr>
           </thead>
           <tbody>
-            {currentRecords
+            {filteredData
               .sort((a, b) => {
                 if (sortColumn) {
                   if (typeof a[sortColumn] === "string") {
@@ -88,7 +86,7 @@ const Table = (props) => {
                   }
                 }
                 return 0;
-              })
+              }).slice(indexOfFirstRecord,indexOfLastRecord)
               .map((item, idx) => (
                 <tr key={idx}>
                   {heading.map((head, id) => {
