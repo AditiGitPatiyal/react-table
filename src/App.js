@@ -17,9 +17,9 @@ function App() {
     setUser(result);
   }
   const getproduct=async()=>{
-    let response = await fetch('https://dummyjson.com/products');
+    let response = await fetch('https://fakestoreapi.com/products');
     let result = await response.json();
-    setProduct(result.products);
+    setProduct(result);
   }
   useEffect(()=>{
     getUser();
@@ -30,7 +30,7 @@ function App() {
       <Header />
       <Routes>
           <Route path='/' element={<Table data={user} />} />
-          <Route path='products' element={<Table data={product}/>} />
+          <Route path='products' element={<Table data={product} />} />
       </Routes>
     </div>
   );
